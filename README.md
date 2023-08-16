@@ -1,6 +1,6 @@
 # Notify
 
-An app that always moderates your dormitory or apartment fees.
+A mobile app that always moderates your dormitory or apartment fees.
 
 ## Getting Started
 
