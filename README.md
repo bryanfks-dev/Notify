@@ -1,6 +1,6 @@
-# notify
+# Notify
 
-A new Flutter project.
+A mobile app that always moderates your dormitory or apartment fees.
 
 ## Getting Started
 
