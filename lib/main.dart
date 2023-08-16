@@ -49,8 +49,8 @@ class _MyApp extends State<MyApp> {
 
     final storage = Hive.box("storage");
 
-    storage.deleteAll(
-        ["config", "uang_makan_attr", "uang_kost_attr", "calendar_events"]);
+    /* storage.deleteAll(
+        ["config", "uang_makan_attr", "uang_kost_attr", "calendar_events"]); */
 
     // Redirect user to homepage if old config found
     if (storage.get("config") != null) _currIdx = 1;
