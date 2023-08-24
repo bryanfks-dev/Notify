@@ -171,8 +171,10 @@ class _UangMakanPage extends State<UangMakanPage> {
       jatuhTempo();
       sisaWaktu();
 
-      _makanHariIni = 0;
-      _makanMingguIni = 0;
+      setState(() {
+        _makanHariIni = 0;
+        _makanMingguIni = 0;
+      });
 
       // Cancel old notification
       NotificationService().cancelNotifications(id: 2);
@@ -348,7 +350,7 @@ class _UangMakanPage extends State<UangMakanPage> {
 
                                   date = DateTime(date.year, date.month,
                                       date.day + (7 - date.weekday));
-                                      
+
                                   NotificationService().scheduleNotification(
                                       id: 2,
                                       title:
