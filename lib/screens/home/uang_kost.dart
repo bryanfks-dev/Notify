@@ -56,19 +56,21 @@ class _UangKostPage extends State<UangKostPage> {
       "Des"
     ];
 
-    _jatuhTempo = "${splitedDate[2]} ${months[int.parse(splitedDate[1]) - 1]}";
+    setState(() {
+      _jatuhTempo = "${splitedDate[2]} ${months[int.parse(splitedDate[1]) - 1]}";
+    });
   }
 
   void sisaWaktu() {
+    // Convert string into datetime object
+    DateTime jatuhTempo =
+        DateFormat('yyyy-MM-dd').parse(_uangKostAttr.jatuhTempo);
+    DateTime today = DateTime.now();
+
+    // Reformat today
+    today = DateTime(today.year, today.month, today.day);
+
     setState(() {
-      // Convert string into datetime object
-      DateTime jatuhTempo =
-          DateFormat('yyyy-MM-dd').parse(_uangKostAttr.jatuhTempo);
-      DateTime today = DateTime.now();
-
-      // Reformat today
-      today = DateTime(today.year, today.month, today.day);
-
       _sisaWaktu = (jatuhTempo.difference(today).inHours / 24).round();
     });
   }
