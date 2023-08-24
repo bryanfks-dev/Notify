@@ -53,14 +53,15 @@ class _UangMakanPage extends State<UangMakanPage> {
     today = DateFormat('yyyy-MM-dd')
         .format(DateTime(today.year, today.month, today.day));
 
-    setState(() {});
     if (_events[today] != null) {
       // Search for an object
       dynamic selectedObj = _events[today]!
           .firstWhereOrNull((event) => event.title == 'Makan di kost');
 
       if (selectedObj != null) {
-        _makanHariIni = int.parse(selectedObj.subtitle);
+        setState(() {
+          _makanHariIni = int.parse(selectedObj.subtitle);
+        });
       }
     }
   }
@@ -80,7 +81,9 @@ class _UangMakanPage extends State<UangMakanPage> {
             .firstWhereOrNull((event) => event.title == 'Makan di kost');
 
         if (selectedObj != null) {
-          _makanMingguIni += int.parse(selectedObj.subtitle);
+          setState(() {
+            _makanMingguIni += int.parse(selectedObj.subtitle);
+          });
         }
       }
 
@@ -107,19 +110,21 @@ class _UangMakanPage extends State<UangMakanPage> {
       "Des"
     ];
 
-    _jatuhTempo = "${splitedDate[2]} ${months[int.parse(splitedDate[1])]}";
+    setState(() {
+      _jatuhTempo = "${splitedDate[2]} ${months[int.parse(splitedDate[1])]}";
+    });
   }
 
   void sisaWaktu() {
+    // Convert string into datetime object
+    DateTime jatuhTempo =
+        DateFormat('yyyy-MM-dd').parse(_uangMakanAttr.jatuhTempo);
+    DateTime today = DateTime.now();
+
+    // Reformat today
+    today = DateTime(today.year, today.month, today.day);
+    
     setState(() {
-      // Convert string into datetime object
-      DateTime jatuhTempo =
-          DateFormat('yyyy-MM-dd').parse(_uangMakanAttr.jatuhTempo);
-      DateTime today = DateTime.now();
-
-      // Reformat today
-      today = DateTime(today.year, today.month, today.day);
-
       _sisaWaktu = (jatuhTempo.difference(today).inHours / 24).round();
     });
   }
