@@ -56,7 +56,7 @@ class _UangKostPage extends State<UangKostPage> {
       "Des"
     ];
 
-    _jatuhTempo = "${splitedDate[2]} ${months[int.parse(splitedDate[1])]}";
+    _jatuhTempo = "${splitedDate[2]} ${months[int.parse(splitedDate[1]) - 1]}";
   }
 
   void sisaWaktu() {

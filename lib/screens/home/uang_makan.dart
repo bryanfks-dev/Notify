@@ -111,7 +111,7 @@ class _UangMakanPage extends State<UangMakanPage> {
     ];
 
     setState(() {
-      _jatuhTempo = "${splitedDate[2]} ${months[int.parse(splitedDate[1])]}";
+      _jatuhTempo = "${splitedDate[2]} ${months[int.parse(splitedDate[1]) - 1]}";
     });
   }
 
@@ -123,7 +123,7 @@ class _UangMakanPage extends State<UangMakanPage> {
 
     // Reformat today
     today = DateTime(today.year, today.month, today.day);
-    
+
     setState(() {
       _sisaWaktu = (jatuhTempo.difference(today).inHours / 24).round();
     });
