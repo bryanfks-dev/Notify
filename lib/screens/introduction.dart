@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:intl/date_time_patterns.dart';
 import 'package:intl/intl.dart';
 
 // Import screens
@@ -12,7 +11,6 @@ import 'package:introduction_screen/introduction_screen.dart';
 
 // Import services
 import 'package:notify/services/notification.dart';
-import 'package:timezone/timezone.dart';
 
 // Input field widget
 class InputField extends StatefulWidget {
