@@ -10,6 +10,8 @@ class NotificationService {
     AndroidInitializationSettings androidInitialSettings =
         const AndroidInitializationSettings('@mipmap/ic_launcher');
 
+    tz.initializeTimeZones();
+    
     var iosInitialSettings = DarwinInitializationSettings(
         requestAlertPermission: true,
         requestBadgePermission: true,
@@ -23,8 +25,6 @@ class NotificationService {
     await notificationPlugin.initialize(initializationSettings,
         onDidReceiveNotificationResponse:
             (NotificationResponse notificationResponse) async {});
-
-    tz.initializeTimeZones();
   }
 
   notificationDetails() {

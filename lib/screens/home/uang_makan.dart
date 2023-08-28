@@ -111,7 +111,8 @@ class _UangMakanPage extends State<UangMakanPage> {
     ];
 
     setState(() {
-      _jatuhTempo = "${splitedDate[2]} ${months[int.parse(splitedDate[1]) - 1]}";
+      _jatuhTempo =
+          "${splitedDate[2]} ${months[int.parse(splitedDate[1]) - 1]}";
     });
   }
 
@@ -162,9 +163,9 @@ class _UangMakanPage extends State<UangMakanPage> {
     // Update jatuh tempo
     if ((_uangMakanAttr.status && _sisaWaktu <= 0) ||
         (_sisaWaktu <= 0 && _makanMingguIni == 0)) {
-      DateTime date = DateFormat("yyyy-MM-dd").parse(_uangMakanAttr.jatuhTempo);
+      DateTime date = DateTime.now();
 
-      date = DateTime(date.year, date.month, date.day + (7 - date.weekday));
+      date = DateTime(date.year, date.month, date.day + (7 - date.weekday % 7));
 
       _uangMakanAttr.jatuhTempo = DateFormat("yyyy-MM-dd").format(date);
 

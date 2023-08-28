@@ -57,7 +57,8 @@ class _UangKostPage extends State<UangKostPage> {
     ];
 
     setState(() {
-      _jatuhTempo = "${splitedDate[2]} ${months[int.parse(splitedDate[1]) - 1]}";
+      _jatuhTempo =
+          "${splitedDate[2]} ${months[int.parse(splitedDate[1]) - 1]}";
     });
   }
 
@@ -91,7 +92,12 @@ class _UangKostPage extends State<UangKostPage> {
     if (_uangKostAttr.status && _sisaWaktu <= 0) {
       DateTime date = DateFormat("yyyy-MM-dd").parse(_uangKostAttr.jatuhTempo);
 
-      date = DateTime(date.year, date.month + 1, date.day);
+      DateTime today = DateTime.now();
+
+      date = DateTime(
+          date.year,
+          today.month + 1,
+          date.day);
 
       _uangKostAttr.jatuhTempo = DateFormat("yyyy-MM-dd").format(date);
 

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:intl/date_time_patterns.dart';
 import 'package:intl/intl.dart';
 
 // Import screens
@@ -11,6 +12,7 @@ import 'package:introduction_screen/introduction_screen.dart';
 
 // Import services
 import 'package:notify/services/notification.dart';
+import 'package:timezone/timezone.dart';
 
 // Input field widget
 class InputField extends StatefulWidget {
@@ -314,33 +316,38 @@ class _IntroductionPage extends State<IntroductionPage> {
 
                       // Save new uang makan attr into storage
                       storage.put("uang_makan_attr", newUangMakanAttr);
-
+                      
                       // Notification for uang makan
-                      NotificationService().scheduleNotification(
-                          id: 2,
-                          title: "Jangan lupa untuk bayar uang makanmu!",
-                          body: "Bayar uang makanmu sekarang!",
-                          scheduledNotificationDateTime: DateTime(
-                              today.year,
-                              today.month,
-                              today.day + (7 - today.weekday),
-                              14,
-                              0,
-                              0));
+                      if (today.day + (7 - today.weekday) != today.day &&
+                          today.hour < 14) {
+                        NotificationService().scheduleNotification(
+                            id: 2,
+                            title: "Jangan lupa untuk bayar uang makanmu!",
+                            body: "Bayar uang makanmu sekarang!",
+                            scheduledNotificationDateTime: DateTime(
+                                today.year,
+                                today.month,
+                                today.day + (7 - today.weekday),
+                                14,
+                                0,
+                                0));
+                      }
                     }
 
                     DateTime due = DateTime(today.year, today.month + 1,
-                            _newConfig["bayar_uang_kost/tgl"]);
+                        _newConfig["bayar_uang_kost/tgl"]);
 
                     // Create notification
                     // Notification for uang kost
-                    NotificationService().scheduleNotification(
-                        id: 1,
-                        title: "Jangan lupa untuk bayar uang kostmu!",
-                        body:
-                            "Bayar uang kostmu Rp. ${NumberFormat.currency(locale: 'id_ID', symbol: '').format(_newConfig['uang_kost/bln'])} sekarang!",
-                        scheduledNotificationDateTime: DateTime(
-                            due.year, due.month, due.day - 2, 14, 0, 0));
+                    if (today.day != due.day && today.hour < 14) {
+                      NotificationService().scheduleNotification(
+                          id: 1,
+                          title: "Jangan lupa untuk bayar uang kostmu!",
+                          body:
+                              "Bayar uang kostmu Rp. ${NumberFormat.currency(locale: 'id_ID', symbol: '').format(_newConfig['uang_kost/bln'])} sekarang!",
+                          scheduledNotificationDateTime: DateTime(
+                              due.year, due.month, due.day - 2, 14, 0, 0));
+                    }
 
                     // Go to homepage
                     Navigator.pushReplacement(context,
